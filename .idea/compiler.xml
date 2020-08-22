@@ -6,8 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ReflectDemo" />
         <module name="reflect-demo" />
+        <module name="ioc-implement" />
+        <module name="ReflectDemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
