@@ -1,4 +1,4 @@
-package cn.draymonder.anonation;
+package demo.anonation;
 
 /**
  * @Description: 课程实体

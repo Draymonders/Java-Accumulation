@@ -1,4 +1,4 @@
-package cn.draymonder.reflect;
+package demo.reflect;
 
 public class ReflectEntity {
 

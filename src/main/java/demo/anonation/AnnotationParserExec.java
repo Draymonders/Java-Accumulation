@@ -1,4 +1,4 @@
-package cn.draymonder.anonation;
+package demo.anonation;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -12,7 +12,7 @@ public class AnnotationParserExec {
   // 类注解
   public static void parseTypeAnnoation() throws ClassNotFoundException {
     System.out.println("类上注解获取");
-    Class clazz = Class.forName("cn.draymonder.anonation.MoocCourse");
+    Class clazz = Class.forName("demo.anonation.MoocCourse");
     CourseAnnotation courseAnnotation = (CourseAnnotation) clazz.getAnnotation(CourseAnnotation.class);
     System.out.println("annotation: " + courseAnnotation);
     String name = courseAnnotation.name();
@@ -26,7 +26,7 @@ public class AnnotationParserExec {
 
   public static void parseFiledAnnotation() throws ClassNotFoundException {
     System.out.println("字段注解获取");
-    Class clazz = Class.forName("cn.draymonder.anonation.MoocCourse");
+    Class clazz = Class.forName("demo.anonation.MoocCourse");
     for (Field field : clazz.getDeclaredFields()) {
       if (field.isAnnotationPresent(InfoAnnotation.class)) {
         InfoAnnotation infoAnnotation = field.getAnnotation(InfoAnnotation.class);
@@ -47,7 +47,7 @@ public class AnnotationParserExec {
 
   public static void parseMethodAnnotation() throws ClassNotFoundException {
     System.out.println("方法注解获取");
-    Class clazz = Class.forName("cn.draymonder.anonation.MoocCourse");
+    Class clazz = Class.forName("demo.anonation.MoocCourse");
     for (Method method : clazz.getDeclaredMethods()) {
       if (method.isAnnotationPresent(CourseAnnotation.class)) {
         CourseAnnotation courseAnnotation = method.getAnnotation(CourseAnnotation.class);

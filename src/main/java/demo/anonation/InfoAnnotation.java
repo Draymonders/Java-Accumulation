@@ -1,4 +1,4 @@
-package cn.draymonder.anonation;
+package demo.anonation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

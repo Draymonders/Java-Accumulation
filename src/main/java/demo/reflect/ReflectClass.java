@@ -1,4 +1,4 @@
-package cn.draymonder.reflect;
+package demo.reflect;
 
 public class ReflectClass {
 
@@ -8,7 +8,7 @@ public class ReflectClass {
     Class clazz2 = new ReflectEntity().getClass();
     System.out.println("方式1 & 2 equal: " + (clazz1 == clazz2));
 
-    Class clazz3 = Class.forName("cn.draymonder.reflect.ReflectEntity");
+    Class clazz3 = Class.forName("demo.reflect.ReflectEntity");
     System.out.println("方式1 & 3 equal: " + (clazz1 == clazz3));
   }
 }
