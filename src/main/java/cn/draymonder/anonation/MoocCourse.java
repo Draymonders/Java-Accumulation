@@ -1,8 +1,5 @@
 package cn.draymonder.anonation;
 
-import cn.draymonder.entity.CourseAnnotation;
-import cn.draymonder.entity.InfoAnnotation;
-
 /**
  * @Description: 课程实体
  * @Date 2020/08/21 23:30

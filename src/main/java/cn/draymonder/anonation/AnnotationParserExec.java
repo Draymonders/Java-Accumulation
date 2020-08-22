@@ -1,9 +1,5 @@
 package cn.draymonder.anonation;
 
-import cn.draymonder.entity.CourseAnnotation;
-import cn.draymonder.entity.InfoAnnotation;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
