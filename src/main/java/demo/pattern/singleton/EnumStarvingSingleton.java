@@ -9,9 +9,29 @@ import java.util.List;
  * @auther Draymonder
  */
 public class EnumStarvingSingleton {
-  private EnumStarvingSingleton () {}
+
+  private EnumStarvingSingleton() {
+  }
+
   public static EnumStarvingSingleton getInstance() {
     return EnumContainer.HOLDER.instance;
+  }
+
+  public static void main(String[] args) throws InterruptedException {
+    int n = 10;
+    List<Thread> threads = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      threads.add(new Thread(() -> {
+        EnumStarvingSingleton instance = EnumStarvingSingleton.getInstance();
+        System.out.println("instance name " + instance);
+      }));
+    }
+    for (int i = 0; i < n; i++) {
+      threads.get(i).start();
+    }
+    for (int i = 0; i < n; i++) {
+      threads.get(i).join();
+    }
   }
 
   private enum EnumContainer {
@@ -19,21 +39,7 @@ public class EnumStarvingSingleton {
     private EnumStarvingSingleton instance;
 
     EnumContainer() {
-        instance = new EnumStarvingSingleton();
+      instance = new EnumStarvingSingleton();
     }
-  }
-
-  public static void main(String[] args) throws InterruptedException {
-    int n = 10;
-    List<Thread> threads = new ArrayList<>();
-    for (int i=0; i<n; i++)
-      threads.add(new Thread(() -> {
-        EnumStarvingSingleton instance = EnumStarvingSingleton.getInstance();
-        System.out.println("instance name " + instance);
-      }));
-    for (int i=0; i<n; i++)
-      threads.get(i).start();
-    for (int i=0; i<n; i++)
-      threads.get(i).join();
   }
 }

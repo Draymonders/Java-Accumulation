@@ -2,7 +2,7 @@ package org.simpleframework.util;
 
 import java.io.File;
 import java.util.Set;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @Description: ClassUtil测试

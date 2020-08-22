@@ -15,16 +15,6 @@ import java.util.Date;
  *
  */
 public class HeadLine {
-  @Override
-  public String toString() {
-    return "HeadLine [lineId=" + lineId + ", lineName=" + lineName + ", lineLink=" + lineLink + ", lineImg="
-        + lineImg + ", priority=" + priority + ", enableStatus=" + enableStatus + ", createTime=" + createTime
-        + ", lastEditTime=" + lastEditTime + ", getLineId()=" + getLineId() + ", getLineName()=" + getLineName()
-        + ", getLineLink()=" + getLineLink() + ", getLineImg()=" + getLineImg() + ", getPriority()="
-        + getPriority() + ", getEnableStatus()=" + getEnableStatus() + ", getCreateTime()=" + getCreateTime()
-        + ", getLastEditTime()=" + getLastEditTime() + ", getClass()=" + getClass() + ", hashCode()="
-        + hashCode() + ", toString()=" + super.toString() + "]";
-  }
 
   private Long lineId;
   // 头条信息
@@ -37,6 +27,8 @@ public class HeadLine {
   private Integer priority;
   // 0.不可用 1.可用
   private Integer enableStatus;
+  private Date createTime;
+  private Date lastEditTime;
 
   public HeadLine() {
   }
@@ -63,6 +55,22 @@ public class HeadLine {
     this.enableStatus = enableStatus;
     this.createTime = createTime;
     this.lastEditTime = lastEditTime;
+  }
+
+  @Override
+  public String toString() {
+    return "HeadLine [lineId=" + lineId + ", lineName=" + lineName + ", lineLink=" + lineLink
+        + ", lineImg="
+        + lineImg + ", priority=" + priority + ", enableStatus=" + enableStatus + ", createTime="
+        + createTime
+        + ", lastEditTime=" + lastEditTime + ", getLineId()=" + getLineId() + ", getLineName()="
+        + getLineName()
+        + ", getLineLink()=" + getLineLink() + ", getLineImg()=" + getLineImg() + ", getPriority()="
+        + getPriority() + ", getEnableStatus()=" + getEnableStatus() + ", getCreateTime()="
+        + getCreateTime()
+        + ", getLastEditTime()=" + getLastEditTime() + ", getClass()=" + getClass()
+        + ", hashCode()="
+        + hashCode() + ", toString()=" + super.toString() + "]";
   }
 
   public Long getLineId() {
@@ -128,8 +136,5 @@ public class HeadLine {
   public void setLastEditTime(Date lastEditTime) {
     this.lastEditTime = lastEditTime;
   }
-
-  private Date createTime;
-  private Date lastEditTime;
 
 }

@@ -6,9 +6,10 @@ package cn.draymonder.entity.dto;
  * @auther Draymonder
  */
 public class Result<T> {
-    int code;
-    String msg;
-    T data;
+
+  int code;
+  String msg;
+  T data;
 
   public int getCode() {
     return code;

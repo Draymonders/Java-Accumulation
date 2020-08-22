@@ -13,12 +13,16 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface InfoAnnotation {
+
   // 名字
   public String name() default "Draymonder";
+
   // 年龄
   public int age() default 20;
+
   // 性别
   public String sex() default "男";
+
   // 会的语言
   public String[] language();
 }

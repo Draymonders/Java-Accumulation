@@ -9,18 +9,21 @@ import java.lang.reflect.Method;
  * @auther Draymonder
  */
 public class AnnotationParserExec {
+
   // 类注解
   public static void parseTypeAnnoation() throws ClassNotFoundException {
     System.out.println("类上注解获取");
     Class clazz = Class.forName("demo.anonation.MoocCourse");
-    CourseAnnotation courseAnnotation = (CourseAnnotation) clazz.getAnnotation(CourseAnnotation.class);
+    CourseAnnotation courseAnnotation = (CourseAnnotation) clazz
+        .getAnnotation(CourseAnnotation.class);
     System.out.println("annotation: " + courseAnnotation);
     String name = courseAnnotation.name();
     String profile = courseAnnotation.profile();
     String tag = courseAnnotation.tag();
     int index = courseAnnotation.index();
 
-    System.out.println(String.format("name: %s, tag: %s, profile: %s, index: %d", name, profile, tag, index));
+    System.out.println(
+        String.format("name: %s, tag: %s, profile: %s, index: %d", name, profile, tag, index));
     System.out.println("=====");
   }
 
@@ -34,7 +37,7 @@ public class AnnotationParserExec {
         String name = infoAnnotation.name();
         int age = infoAnnotation.age();
         String sex = infoAnnotation.sex();
-        String []languages = infoAnnotation.language();
+        String[] languages = infoAnnotation.language();
         System.out.println(String.format("name: %s, sex: %s, age: %d", name, sex, age));
         System.out.print("used languages:");
         for (String language : languages) {
@@ -57,7 +60,8 @@ public class AnnotationParserExec {
         String tag = courseAnnotation.tag();
         int index = courseAnnotation.index();
 
-        System.out.println(String.format("name: %s, tag: %s, profile: %s, index: %d", name, profile, tag, index));
+        System.out.println(
+            String.format("name: %s, tag: %s, profile: %s, index: %d", name, profile, tag, index));
       }
     }
 

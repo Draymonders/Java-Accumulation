@@ -10,6 +10,7 @@ import java.util.List;
  * @auther Draymonder
  */
 public class MainPageInfoDTO {
+
   List<HeadLine> headLineList;
   List<ProductCategory> productCategorieList;
 

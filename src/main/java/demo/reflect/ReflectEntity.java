@@ -2,18 +2,10 @@ package demo.reflect;
 
 public class ReflectEntity {
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  private String name;
-  private int index;
   public String age;
   protected long ts;
+  private String name;
+  private int index;
 
   public ReflectEntity() {
     System.out.println("这是默认构造方法");
@@ -42,6 +34,14 @@ public class ReflectEntity {
     this.index = index;
     this.ts = ts;
     System.out.println("这是共有 构造方法4, 初始化了4个参数");
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   private String showName(String token, int id) {

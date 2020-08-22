@@ -6,9 +6,12 @@ package demo.pattern.singleton;
  * @auther Draymonder
  */
 public class StarvingSingleton {
-  private StarvingSingleton() {}
 
   private static final StarvingSingleton starvingSingleton = new StarvingSingleton();
+
+  private StarvingSingleton() {
+  }
+
   public static StarvingSingleton getInstance() {
     return starvingSingleton;
   }

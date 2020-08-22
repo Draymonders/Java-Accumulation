@@ -27,7 +27,7 @@ public class ReflectMethod {
     System.out.println("get specific method: " + method);
     method.setAccessible(true);
 
-    String name = (String)method.invoke(entity, "Draymonder", 666);
+    String name = (String) method.invoke(entity, "Draymonder", 666);
     System.out.println("when exec the method && get result: " + name);
   }
 }

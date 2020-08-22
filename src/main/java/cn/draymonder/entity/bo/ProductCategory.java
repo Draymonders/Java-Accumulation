@@ -8,8 +8,12 @@ import java.util.Date;
  * @auther Draymonder
  */
 public class ProductCategory {
+
   private Long productCategoryId;
   private Long shopId;
+  private String productCategoryName;
+  private Integer priority;
+  private Date createTime;
 
   public ProductCategory() {
   }
@@ -22,7 +26,8 @@ public class ProductCategory {
    * @param priority
    * @param createTime
    */
-  public ProductCategory(Long productCategoryId, Long shopId, String productCategoryName, Integer priority,
+  public ProductCategory(Long productCategoryId, Long shopId, String productCategoryName,
+      Integer priority,
       Date createTime) {
     super();
     this.productCategoryId = productCategoryId;
@@ -31,11 +36,6 @@ public class ProductCategory {
     this.priority = priority;
     this.createTime = createTime;
   }
-
-  private String productCategoryName;
-  private Integer priority;
-  private Date createTime;
-
 
   public Long getProductCategoryId() {
     return productCategoryId;
@@ -80,10 +80,14 @@ public class ProductCategory {
   @Override
   public String toString() {
     return "ProductCategory [productCategoryId=" + productCategoryId + ", shopId=" + shopId
-        + ", productCategoryName=" + productCategoryName + ", priority=" + priority + ", createTime="
-        + createTime + ", getProductCategoryId()=" + getProductCategoryId() + ", getShopId()=" + getShopId()
-        + ", getProductCategoryName()=" + getProductCategoryName() + ", getPriority()=" + getPriority()
-        + ", getCreateTime()=" + getCreateTime() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+        + ", productCategoryName=" + productCategoryName + ", priority=" + priority
+        + ", createTime="
+        + createTime + ", getProductCategoryId()=" + getProductCategoryId() + ", getShopId()="
+        + getShopId()
+        + ", getProductCategoryName()=" + getProductCategoryName() + ", getPriority()="
+        + getPriority()
+        + ", getCreateTime()=" + getCreateTime() + ", getClass()=" + getClass() + ", hashCode()="
+        + hashCode()
         + ", toString()=" + super.toString() + "]";
   }
 
