@@ -19,7 +19,7 @@ import org.simpleframework.inject.annotation.Autowired;
 public class MainPageController {
 
   @Getter
-  @Autowired
+  @Autowired(value = "MainPageInfoServiceImpl")
   private MainPageInfoService mainPageInfoService;
 
   public Result<MainPageInfoDTO> getMainPage(HttpServletRequest req, HttpServletResponse resp) {

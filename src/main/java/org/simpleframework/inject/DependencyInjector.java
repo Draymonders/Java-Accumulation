@@ -62,17 +62,21 @@ public class DependencyInjector {
       }
       for (Field field : fields) {
         if (field.isAnnotationPresent(Autowired.class)) {
+          // 获取注解里面的Autowired的值
+          Autowired autowired = field.getAnnotation(Autowired.class);
+          String autowiredValue = autowired.value();
+
           // 这个字段上有Autowired
           // 获取到当前field的类型
           Class<?> fieldClass = field.getType();
           // 获取到当前field的value的class信息
-          Class<?> fieldValueClass = getBeanClassByType(fieldClass);
+          Class<?> fieldValueClass = getBeanClassByType(fieldClass, autowiredValue);
           Object fieldValue = getBean(fieldValueClass);
 
           // 获取到当前的对象
           Object currentOjbect = getBean(clazz);
           ClassUtil.setFieldValue(field, currentOjbect, fieldValue, true);
-
+          log.info("Object {} field {} has bean injected Object {}", currentOjbect, field.getName(), fieldValue);
           dependencyCount++;
         }
       }
@@ -84,21 +88,27 @@ public class DependencyInjector {
    * 根据field的类去获取field的值 举例如: `aService` 去获取 `aService` or `aServiceImpl`
    *
    * @param fieldClass 字段
+   * @param autowiredValue @Autowired的value值
    * @return 获取到的beanClass类
    */
-  private Class<?> getBeanClassByType(Class<?> fieldClass) {
+  private Class<?> getBeanClassByType(Class<?> fieldClass, String autowiredValue) {
     Object currentClassValue = beanContainer.getBeanByClass(fieldClass);
     if (ValidationUtil.isEmpty(currentClassValue)) {
-      Set<Class<?>> superBeanClassSet = beanContainer
+      Set<Class<?>> subBeanClassSet = beanContainer
           .getBeansBySuperClassOrInterface(fieldClass);
-      if (ValidationUtil.isEmpty(superBeanClassSet)) {
+      if (ValidationUtil.isEmpty(subBeanClassSet)) {
         log.error("can not find filed class [{}] val", fieldClass);
-      } else if (superBeanClassSet.size() == 1) {
-        return superBeanClassSet.iterator().next();
+      } else if (subBeanClassSet.size() == 1) {
+        return subBeanClassSet.iterator().next();
       } else {
+        for (Class<?> subClass : subBeanClassSet) {
+          if (autowiredValue.equals(subClass.getSimpleName())) {
+            return subClass;
+          }
+        }
         // TODO: 存在多实现类的情况, 需要根据 `@Quifier` val去验证, 先返回null
         throw new RuntimeException(
-            String.format("the field class [%s] has multi implements", fieldClass));
+            String.format("the field class [%s] has multi implements, can not find the specific one", fieldClass));
       }
     }
     throw new RuntimeException(String.format("the field class [%s] has not implement", fieldClass));

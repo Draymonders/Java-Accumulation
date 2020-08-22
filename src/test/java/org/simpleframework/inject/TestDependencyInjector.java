@@ -2,6 +2,7 @@ package org.simpleframework.inject;
 
 
 import cn.draymonder.controller.MainPageController;
+import cn.draymonder.service.combine.impl.MainPageInfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,5 +33,7 @@ public class TestDependencyInjector {
     // 依赖注入
     dependencyInjector.doIoC();
     Assertions.assertNotNull(mainPageController.getMainPageInfoService());
+    Assertions
+        .assertTrue(mainPageController.getMainPageInfoService() instanceof MainPageInfoServiceImpl);
   }
 }
