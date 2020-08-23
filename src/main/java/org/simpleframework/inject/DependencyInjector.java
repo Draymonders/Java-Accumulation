@@ -98,6 +98,7 @@ public class DependencyInjector {
           .getBeansBySuperClassOrInterface(fieldClass);
       if (ValidationUtil.isEmpty(subBeanClassSet)) {
         log.error("can not find filed class [{}] val", fieldClass);
+        throw new RuntimeException(String.format("the field class [%s] has not implement", fieldClass));
       } else if (subBeanClassSet.size() == 1) {
         return subBeanClassSet.iterator().next();
       } else {
@@ -106,12 +107,11 @@ public class DependencyInjector {
             return subClass;
           }
         }
-        // TODO: 存在多实现类的情况, 需要根据 `@Quifier` val去验证, 先返回null
         throw new RuntimeException(
             String.format("the field class [%s] has multi implements, can not find the specific one", fieldClass));
       }
-    }
-    throw new RuntimeException(String.format("the field class [%s] has not implement", fieldClass));
+    } else
+      return fieldClass;
   }
 
   /**
