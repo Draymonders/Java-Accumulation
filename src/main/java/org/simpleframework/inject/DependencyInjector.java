@@ -120,7 +120,7 @@ public class DependencyInjector {
    * @param clazz 拥有field字段的类
    * @return clazz类对应的实例化对象
    */
-  private Object getBean(Class<?> clazz) {
+  public Object getBean(Class<?> clazz) {
     return beanContainer.getBeanByClass(clazz);
   }
 

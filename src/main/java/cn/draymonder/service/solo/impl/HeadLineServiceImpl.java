@@ -37,6 +37,6 @@ public class HeadLineServiceImpl implements HeadLineService {
   @Override
   public Result<List<HeadLine>> queryHeadLine(HeadLine headLineCondition, int pageIndex,
       int pageSize) {
-    return null;
+    return new Result<>();
   }
 }

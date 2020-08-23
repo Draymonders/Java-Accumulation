@@ -9,6 +9,7 @@ import cn.draymonder.service.solo.HeadLineService;
 import cn.draymonder.service.solo.ProductCategoryService;
 import java.util.List;
 import org.simpleframework.core.annotation.Service;
+import org.simpleframework.inject.annotation.Autowired;
 
 /**
  * @Description:
@@ -17,8 +18,10 @@ import org.simpleframework.core.annotation.Service;
  */
 @Service
 public class MainPageInfoServiceImpl implements MainPageInfoService {
-
+  @Autowired
   private HeadLineService headLineService;
+
+  @Autowired
   private ProductCategoryService productCategoryService;
 
 
