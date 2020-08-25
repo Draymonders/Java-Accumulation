@@ -11,11 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ApiMain {
 
   public static void main(String[] args) {
-    log.info("A isAssignable From A : {}", A.class.isAssignableFrom(A.class));
-    log.info("B isAssignable From A : {}", B.class.isAssignableFrom(A.class));
-    log.info("A isAssignable From C : {}", A.class.isAssignableFrom(C.class));
-    log.info("B isAssignable From C : {}", B.class.isAssignableFrom(C.class));
-    log.info("C isAssignable From C : {}", C.class.isAssignableFrom(C.class));
+    log.info("A isAssignable From A : {}", AA.class.isAssignableFrom(AA.class));
+    log.info("B isAssignable From A : {}", BB.class.isAssignableFrom(AA.class));
+    log.info("A isAssignable From C : {}", AA.class.isAssignableFrom(CC.class));
+    log.info("B isAssignable From C : {}", BB.class.isAssignableFrom(CC.class));
+    log.info("C isAssignable From C : {}", CC.class.isAssignableFrom(CC.class));
   }
 
 }

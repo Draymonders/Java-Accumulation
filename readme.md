@@ -14,6 +14,7 @@ IOC容器简易实现
   - api            // api 相关学习
   - pattern        // 设计模式
   - reflect        // 反射
+  - jvm_params     // JVM相关参数学习
 - org.simpleframework
   - core           // bean 相关实现
   - util           // 封装的工具类
@@ -21,4 +22,5 @@ IOC容器简易实现
 - cn.draymonder    // 业务CURD Demo, 使用Servlet作为容器      
 ```
 ## reference
+- [Maven 使用 tomcat7-maven-plugin](https://www.cnblogs.com/dyh004/p/11578954.html)
 - [Test Order Method](https://www.baeldung.com/junit-5-test-order) 
