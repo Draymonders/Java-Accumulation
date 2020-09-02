@@ -1,5 +1,7 @@
 package demo.pattern.proxy.static_proxy;
 
+import demo.pattern.proxy.UserDao;
+
 /**
  * @Description:
  * @Date 2020/09/02 22:22

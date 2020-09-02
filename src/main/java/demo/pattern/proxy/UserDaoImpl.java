@@ -1,4 +1,4 @@
-package demo.pattern.proxy.static_proxy;
+package demo.pattern.proxy;
 
 public class UserDaoImpl implements UserDao {
 
