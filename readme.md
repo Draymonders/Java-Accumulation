@@ -3,7 +3,7 @@
 IOC容器简易实现
 ## How to Run
 1. `git clone && cd ./ioc-implement`
-2. `mvn clean install -DTest.skip=true` 打包
+2. `mvn clean install -DskipTests=true` 打包
 3. `mvn tomcat7:run` 使用tomcat7作为servlet容器
 4. `curl -s http://localhost:8080/ioc-implement/mainpage` 看是否得到`get main page success`, 如果得到, 则搭建成功，如若失败，请移至issue区
  
