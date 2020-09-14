@@ -1,6 +1,9 @@
 package demo.kafka.admin;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -8,8 +11,12 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
+import org.apache.kafka.clients.admin.AlterConfigOp;
+import org.apache.kafka.clients.admin.AlterConfigOp.OpType;
+import org.apache.kafka.clients.admin.ConfigEntry;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
 import org.apache.kafka.clients.admin.ListTopicsResult;
+import org.apache.kafka.clients.admin.NewPartitions;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.admin.TopicDescription;
 import org.apache.kafka.common.config.ConfigResource;
@@ -34,20 +41,39 @@ public class AdminSample {
     listTopics();
      */
     // descTopics();
+    // descConfig();
+
+    // alterPartitionConfig();
+    alterConfig();
     descConfig();
-
   }
 
   /**
-   * todo: 修改topic对应的partition个数 partition从2 -> 3
+   * 修改topic对应的partition个数 partition从2 -> 3
    */
-  public static void alterPartitionConfig() {
+  public static void alterPartitionConfig() throws ExecutionException, InterruptedException {
+    AdminClient adminClient = adminClient();
+    Map<String, NewPartitions> newPartitions = new HashMap<>();
+
+    NewPartitions partition = NewPartitions.increaseTo(3);
+    newPartitions.put(TOPIC_NAME, partition);
+    adminClient.createPartitions(newPartitions).all().get();
   }
 
   /**
-   * todo: 修改配置信息, preallocate由 false -> true
+   * 修改配置信息, preallocate由 false -> true
    */
-  public static void alterConfig() {
+  public static void alterConfig() throws ExecutionException, InterruptedException {
+    AdminClient adminClient = adminClient();
+
+    Map<ConfigResource, Collection<AlterConfigOp>> configs = new HashMap<>();
+    ConfigResource configResource = new ConfigResource(Type.TOPIC, TOPIC_NAME);
+
+    List<AlterConfigOp> alterConfigOps = new ArrayList<>();
+    alterConfigOps.add(new AlterConfigOp(new ConfigEntry("preallocate", "true"), OpType.SET));
+    configs.put(configResource, alterConfigOps);
+
+    adminClient.incrementalAlterConfigs(configs).all().get();
   }
 
   /**
