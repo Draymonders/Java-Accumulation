@@ -43,6 +43,8 @@ public class ProducerSample {
           .format("send data %d:  partition %s offset %d", id, recordMetadata.partition(),
               recordMetadata.offset()));
     }
+
+    producer.close();
   }
 
   /**
@@ -123,7 +125,7 @@ public class ProducerSample {
     properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
         "org.apache.kafka.common.serialization.StringSerializer");
     if (loadBalance) {
-      properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, "");
+      properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, "demo.kafka.producer.PartitionSample");
     }
     return new KafkaProducer<>(properties);
   }
