@@ -31,11 +31,14 @@ public class AdminSample {
 
   public static final String TOPIC_NAME = "Draymonder_topic";
 
+  public static final String SERVER = "10.40.58.64:9092";
+
   public static void main(String[] args) throws Exception {
     /*
     AdminClient adminClient = adminClient();
     System.out.println("admin client: " + adminClient);
      */
+    // createTopic();
     /*
     createTopic();
     listTopics();
@@ -43,9 +46,9 @@ public class AdminSample {
     // descTopics();
     // descConfig();
 
-    // alterPartitionConfig();
-    alterConfig();
-    descConfig();
+    alterPartitionConfig();
+    // alterConfig();
+//    descConfig();
   }
 
   /**
@@ -55,9 +58,10 @@ public class AdminSample {
     AdminClient adminClient = adminClient();
     Map<String, NewPartitions> newPartitions = new HashMap<>();
 
-    NewPartitions partition = NewPartitions.increaseTo(3);
+    NewPartitions partition = NewPartitions.increaseTo(4);
     newPartitions.put(TOPIC_NAME, partition);
     adminClient.createPartitions(newPartitions).all().get();
+    adminClient.close();
   }
 
   /**
@@ -74,6 +78,7 @@ public class AdminSample {
     configs.put(configResource, alterConfigOps);
 
     adminClient.incrementalAlterConfigs(configs).all().get();
+    adminClient.close();
   }
 
   /**
@@ -117,6 +122,7 @@ public class AdminSample {
     adminClient.describeConfigs(List.of(configResource)).all().get().forEach(((resource, config) -> {
       System.out.println("resource: " + resource + " config: " + config);
     }));
+    adminClient.close();
   }
 
 
@@ -147,6 +153,7 @@ public class AdminSample {
     topicsDesc.forEach((topicName, topicDescription) -> {
       System.out.println("topic name: " + topicName + " desc: " + topicDescription);
     });
+    adminClient.close();
   }
 
 
@@ -158,6 +165,7 @@ public class AdminSample {
     ListTopicsResult listTopicsResult = adminClient.listTopics();
     Set<String> names = listTopicsResult.names().get();
     names.forEach(System.out::println);
+    adminClient.close();
   }
 
   /**
@@ -166,9 +174,10 @@ public class AdminSample {
   public static void createTopic() {
     AdminClient adminClient = adminClient();
 
-    NewTopic topic = new NewTopic(TOPIC_NAME, 2, (short) 1);
+    NewTopic topic = new NewTopic(TOPIC_NAME, 3, (short) 1);
     CreateTopicsResult topicCreateResult = adminClient.createTopics(Arrays.asList(topic));
     System.out.println("create topic result: " + topicCreateResult);
+    adminClient.close();
   }
 
   /**
@@ -178,7 +187,7 @@ public class AdminSample {
    */
   public static AdminClient adminClient() {
     Properties props = new Properties();
-    props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "10.60.24.37:9092");
+    props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, SERVER);
 
     AdminClient adminClient = AdminClient.create(props);
     return adminClient;
