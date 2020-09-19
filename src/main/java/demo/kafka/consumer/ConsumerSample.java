@@ -37,6 +37,19 @@ public class ConsumerSample {
   }
 
   /**
+   * 限流
+   */
+  public static void controlFlow() {
+    KafkaConsumer<String, String> consumer = consumer(false);
+    consumer.subscribe(List.of(TOPIC_NAME));
+
+    // 停止从partitions读取消息
+    // consumer.pause(Collection<TopicPartition> partitions);
+    // 重新从partitions读取消息
+    // consumer.resume(Collection<TopicPartition> partitions);
+  }
+
+  /**
    * 控制offset位置
    */
   public static void controlOffset() {
@@ -52,7 +65,7 @@ public class ConsumerSample {
           List<ConsumerRecord<String, String>> partitionRecords = records.records(topicPartition);
           long lastOffset = -1;
           for (ConsumerRecord<String, String> partitionRecord : partitionRecords) {
-            System.out.printf("partion = %d, offset = %d, key = %s, value = %s%n",
+            System.err.printf("partion = %d, offset = %d, key = %s, value = %s%n",
                 partitionRecord.partition(),
                 partitionRecord.offset(), partitionRecord.key(), partitionRecord.value());
             lastOffset = partitionRecord.offset();
@@ -208,11 +221,13 @@ public class ConsumerSample {
   public static KafkaConsumer<String, String> consumer(boolean autoCommit) {
     Properties props = new Properties();
     props.setProperty("bootstrap.servers", SERVER);
-    props.setProperty("group.id", "manual_commit_offset");
+    props.setProperty("group.id", "different_consumer_group");
     props.setProperty("enable.auto.commit", autoCommit ? "true" : "false");
     if (autoCommit) {
       props.setProperty("auto.commit.interval.ms", "1000");
     }
+    // 新的consumer group 不会自动设置 offset, 所以需要配置
+    props.setProperty("auto.offset.reset", "earliest");
     props.setProperty("key.deserializer",
         "org.apache.kafka.common.serialization.StringDeserializer");
     props.setProperty("value.deserializer",
