@@ -17,7 +17,7 @@ public class StarvingSingleton {
   }
 
   public static void main(String[] args) {
-    System.out.println(starvingSingleton.getInstance());
-    System.out.println(starvingSingleton.getInstance());
+    System.out.println(getInstance());
+    System.out.println(getInstance());
   }
 }
