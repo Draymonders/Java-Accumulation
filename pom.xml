@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cn.draymonder</groupId>
-  <artifactId>ioc-implement</artifactId>
+  <artifactId>Java-Accumulation</artifactId>
   <version>v1.0</version>
   <packaging>war</packaging>
 
@@ -58,7 +58,7 @@
   </dependencies>
 
   <build>
-    <finalName>ioc-implement</finalName>
+    <finalName>Java-Accumulation</finalName>
     <pluginManagement>
       <plugins>
         <plugin>

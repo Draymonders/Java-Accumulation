@@ -9,6 +9,7 @@
         <module name="reflect-demo" />
         <module name="ioc-implement" />
         <module name="ReflectDemo" />
+        <module name="Java-Accumulation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />

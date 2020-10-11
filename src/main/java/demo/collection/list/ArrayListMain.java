@@ -12,6 +12,21 @@ public class ArrayListMain {
 
   public static void main(String[] args) {
     testRemove();
+    testSingle();
+  }
+
+  /**
+   * 测试一行代码加入集合数据
+   */
+  public static void testSingle() {
+    ArrayList<Integer> arr = new ArrayList<>() {
+      {
+        add(1);
+        add(2);
+        add(3);
+      }
+    };
+    System.out.println(arr.size());
   }
 
   /**
