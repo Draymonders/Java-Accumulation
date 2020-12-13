@@ -13,7 +13,6 @@
   - collection     // Java 集合复习巩固
   - kafka          // kafka 相关学习
   - elasticsearch  // es 相关学习
-- leetcode         // java刷题leetcode
 - org.simpleframework
   - core           // bean 相关实现
   - util           // 封装的工具类

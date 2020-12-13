@@ -51,18 +51,15 @@ public class ClassUtil {
       return;
     }
 
-    File[] files = packageDir.listFiles(new FileFilter() {
-      @Override
-      public boolean accept(File file) {
-        if (file.isDirectory()) {
-          return true;
-        } else if (file.isFile()) {
-          if (file.getAbsolutePath().endsWith(".class")) {
-            addClassToClassSet(classSet, file, packageNamePrefiex);
-          }
+    File[] files = packageDir.listFiles(file -> {
+      if (file.isDirectory()) {
+        return true;
+      } else if (file.isFile()) {
+        if (file.getAbsolutePath().endsWith(".class")) {
+          addClassToClassSet(classSet, file, packageNamePrefiex);
         }
-        return false;
       }
+      return false;
     });
     // 递归去访问子目录下的class文件
     if (files != null) {

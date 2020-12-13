@@ -31,6 +31,7 @@ public class DependencyInjector {
   }
 
   public DependencyInjector(String basePackageName) {
+    // 单例模式创建bean容器
     beanContainer = BeanContainer.getInstance();
     this.basePackageName = basePackageName;
   }
@@ -66,17 +67,27 @@ public class DependencyInjector {
           Autowired autowired = field.getAnnotation(Autowired.class);
           String autowiredValue = autowired.value();
 
-          // 这个字段上有Autowired
-          // 获取到当前field的类型
-          Class<?> fieldClass = field.getType();
-          // 获取到当前field的value的class信息
-          Class<?> fieldValueClass = getBeanClassByType(fieldClass, autowiredValue);
-          Object fieldValue = getBean(fieldValueClass);
+          /**
+           * AServiceImpl implements AService
+           *
+           * @Autowired
+           * private AService aSerivce;
+           *
+           */
 
-          // 获取到当前的对象
+          // 这个字段上有Autowired
+          // 读取key的class
+          Class<?> fieldKeyClass = field.getType();
+          // 读取value的class
+          Class<?> fieldValueClass = getBeanClassByType(fieldKeyClass, autowiredValue);
+          // 根据value的class拿到对应的bean
+          Object valueBean = getBean(fieldValueClass);
+
+          // 对clazz的field的key设置为value
           Object currentOjbect = getBean(clazz);
-          ClassUtil.setFieldValue(field, currentOjbect, fieldValue, true);
-          log.info("Object {} field {} has bean injected Object {}", currentOjbect, field.getName(), fieldValue);
+          ClassUtil.setFieldValue(field, currentOjbect, valueBean, true);
+          log.info("Object {} field {} has bean injected Object {}", currentOjbect, field.getName(),
+              valueBean);
           dependencyCount++;
         }
       }
@@ -85,20 +96,21 @@ public class DependencyInjector {
   }
 
   /**
-   * 根据field的类去获取field的值 举例如: `aService` 去获取 `aService` or `aServiceImpl`
+   * 根据field的类去获取field的具体的实现类 举例如: `aService` 去获取 `aService` or `aServiceImpl`
    *
-   * @param fieldClass 字段
+   * @param fieldClass     字段
    * @param autowiredValue @Autowired的value值
    * @return 获取到的beanClass类
    */
   private Class<?> getBeanClassByType(Class<?> fieldClass, String autowiredValue) {
-    Object currentClassValue = beanContainer.getBeanByClass(fieldClass);
-    if (ValidationUtil.isEmpty(currentClassValue)) {
+    Object currentBean = beanContainer.getBeanByClass(fieldClass);
+    if (ValidationUtil.isEmpty(currentBean)) {
       Set<Class<?>> subBeanClassSet = beanContainer
           .getBeansBySuperClassOrInterface(fieldClass);
       if (ValidationUtil.isEmpty(subBeanClassSet)) {
         log.error("can not find filed class [{}] val", fieldClass);
-        throw new RuntimeException(String.format("the field class [%s] has not implement", fieldClass));
+        throw new RuntimeException(
+            String.format("the field class [%s] has not implement", fieldClass));
       } else if (subBeanClassSet.size() == 1) {
         return subBeanClassSet.iterator().next();
       } else {
@@ -108,10 +120,13 @@ public class DependencyInjector {
           }
         }
         throw new RuntimeException(
-            String.format("the field class [%s] has multi implements, can not find the specific one", fieldClass));
+            String
+                .format("the field class [%s] has multi implements, can not find the specific one",
+                    fieldClass));
       }
-    } else
+    } else {
       return fieldClass;
+    }
   }
 
   /**
