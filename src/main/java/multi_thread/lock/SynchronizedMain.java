@@ -1,4 +1,4 @@
-package multi_thread;
+package multi_thread.lock;
 
 /**
  * synchronized锁学习
