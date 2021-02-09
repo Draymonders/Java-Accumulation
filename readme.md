@@ -4,15 +4,15 @@
 
 ## table
 ```
+- collection       // Java 集合学习巩固
+- concurrency      // 并发相关学习
+- jvm              // JVM相关学习
 - demo
   - anonation      // 注解相关操作
   - api            // api 相关学习
   - pattern        // 设计模式
   - reflect        // 反射
-  - jvm_params     // JVM相关参数学习
-  - collection     // Java 集合复习巩固
   - kafka          // kafka 相关学习
-  - elasticsearch  // es 相关学习
 - org.simpleframework
   - core           // bean 相关实现
   - util           // 封装的工具类
