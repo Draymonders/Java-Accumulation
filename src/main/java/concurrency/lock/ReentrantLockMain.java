@@ -1,4 +1,4 @@
-package multi_thread.lock;
+package concurrency.lock;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
