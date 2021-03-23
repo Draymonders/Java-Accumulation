@@ -2,6 +2,7 @@ package collection.map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -35,7 +36,8 @@ public class MapMain {
     // TreeMapMain.testUse();
     // TreeMapMain.testGetSequence();
 
-    LinkedHashMapMain.testUse();
+    // LinkedHashMapMain.testUse();
+    HashTableMain.testKeyCanNotNull();
   }
 
   @NoArgsConstructor
@@ -58,6 +60,13 @@ public class MapMain {
         return (key < o.key) ? -1 : 1;
       }
       return -1;
+    }
+  }
+
+  static class HashTableMain {
+    static void testKeyCanNotNull() {
+      Hashtable<String, String> hashTable = new Hashtable<>();
+      hashTable.contains(null);
     }
   }
 
